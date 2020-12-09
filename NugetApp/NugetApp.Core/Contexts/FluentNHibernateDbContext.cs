@@ -36,7 +36,6 @@ namespace NugetApp.Core.Contexts
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString))
                 .ExposeConfiguration(cfg =>
                 {
-                    //cfg.SessionFactory().DefaultFlushMode(FlushMode.Commit);
                     cfg.AddDeserializedMapping(MappingHelper.GetIdentityMappings(myEntities), null);
                     new SchemaUpdate(cfg).Execute(false, true);
                 });
