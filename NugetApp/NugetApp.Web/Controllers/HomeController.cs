@@ -10,8 +10,6 @@ namespace NugetApp.Web.Controllers
     {
         public ActionResult Index()
         {
-            //ViewBag.Title = "NugetApp";
-
             return View();
         }
 

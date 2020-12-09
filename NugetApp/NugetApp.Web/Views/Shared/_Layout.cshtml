@@ -3,34 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-
-    @Html.Partial("_NavigationBarPartial")
-    <br />
-    <div class="container">
-        <div class="row">
-            <form aria-label="Package search bar" class="col-sm-12" action="/Home/Index" method="get">
-                <div class="input-group">
-                    <input name="q" type="text" class="form-control" id="search" aria-label="Enter packages to search" placeholder="Search for packages..." autocomplete="off" value="">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-warning btn-search" type="submit" title="Search for packages" aria-label="Search">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    @Html.Partial("_NavBarPartial")
     <div class="container body-content">
         @RenderBody()
         <hr />
-
-        @Html.Partial("_FooterPartial")
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
