@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using NugetApp.Core.Services;
 using NugetApp.Web.Models;
 
 namespace NugetApp.Web.Controllers

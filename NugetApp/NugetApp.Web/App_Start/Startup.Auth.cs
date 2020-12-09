@@ -3,9 +3,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using NugetApp.Web.Models;
+using NugetApp.Core.Services;
+using NugetApp.Core.Contexts;
+using NugetApp.Core.Entities;
 
 namespace NugetApp.Web
 {
@@ -15,7 +16,8 @@ namespace NugetApp.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(() => FluentNHibernateDbContext.SessionOpen());
+
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
