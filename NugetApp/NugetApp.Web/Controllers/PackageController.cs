@@ -68,12 +68,12 @@ namespace NugetApp.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public void Delete(int id)
-        {
-            var model = new PackageUploadModel();
-            model.Delete(id);
-        }
+        //[HttpPost]
+        //public void Delete(int id)
+        //{
+        //    var model = new PackageUploadModel();
+        //    model.Delete(id);
+        //}
 
         [HttpGet]
         public async Task<ActionResult> Details(int id)

@@ -9,7 +9,7 @@
 <div class="container">
 
     <ul class="list-group list-group-flush">
-        @foreach (var package in Model.PackageDetails)
+        @foreach (var package in Model.Packages)
         {
             <li class="list-group-item">
                 <article class="package" role="listitem">
@@ -21,7 +21,7 @@
                         <div class="col-sm-11">
                             <div class="package-header">
                                 <h3>
-                                    @Html.ActionLink(@package.Name, "Details", new { id = @package.Id })
+                                    <a href="~/Package/Details/@package.Id">@package.PackageName</a>
                                     <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-20x20.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
                                 </h3>
 
@@ -34,7 +34,7 @@
                                 <li>
                                     <span class="icon-text">
                                         <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
-                                        @package.PackageDownloadCount total downloads
+                                        @package.TotalDowloadCount total downloads
                                     </span>
                                 </li>
                                 @*<li>

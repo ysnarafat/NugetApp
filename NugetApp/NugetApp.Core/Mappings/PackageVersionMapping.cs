@@ -13,7 +13,7 @@ namespace NugetApp.Core.Mappings
         public PackageVersionMapping()
         {
             Id(p => p.Id).GeneratedBy.Identity();
-            Map(p => p.Description);
+            //Map(p => p.Description);
             Map(p => p.VersionNumber);
             Map(p => p.FilePath);
             Map(p => p.VersionDownloadCount);

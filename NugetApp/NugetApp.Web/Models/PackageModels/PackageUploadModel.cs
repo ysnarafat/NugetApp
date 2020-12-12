@@ -43,6 +43,8 @@ namespace NugetApp.Web.Models.PackageModels
         {
             var user = await _applicationUserManager.FindByEmailAsync(userName);
 
+            if (user == null) throw new InvalidOperationException("User cannot be null.");
+
             var package = new Package
             {
                 Name = Name,
@@ -68,30 +70,30 @@ namespace NugetApp.Web.Models.PackageModels
             await _packageService.Upload(package);
         }
 
-        public async Task Delete(int userName)
-        {
-            //var user = await _applicationUserManager.FindByEmailAsync(userName);
+        //public async Task Delete(int userName)
+        //{
+        //    //var user = await _applicationUserManager.FindByEmailAsync(userName);
 
-            //var package = new Package
-            //{
-            //    Name = Name,
-            //    PackageDownloadCount = 0,
-            //    ApplicationUser = user,
-            //};
+        //    //var package = new Package
+        //    //{
+        //    //    Name = Name,
+        //    //    PackageDownloadCount = 0,
+        //    //    ApplicationUser = user,
+        //    //};
 
-            //package.PackageVersions = new List<PackageVersion>
-            //{
-            //        new PackageVersion
-            //        {
-            //            Description = "Test",
-            //            VersionDownloadCount = 0,
-            //            CreatedAt = DateTime.Now,
-            //            Package = package
-            //        }
-            //};
+        //    //package.PackageVersions = new List<PackageVersion>
+        //    //{
+        //    //        new PackageVersion
+        //    //        {
+        //    //            Description = "Test",
+        //    //            VersionDownloadCount = 0,
+        //    //            CreatedAt = DateTime.Now,
+        //    //            Package = package
+        //    //        }
+        //    //};
 
-            _packageService.Delete(userName);
-        }
+        //    _packageService.Delete(userName);
+        //}
 
         private string StoreFile()
         {

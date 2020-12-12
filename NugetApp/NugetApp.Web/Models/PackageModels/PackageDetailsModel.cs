@@ -13,7 +13,6 @@ namespace NugetApp.Web.Models.PackageModels
     public class PackageDetailsModel
     {
         private readonly IPackageService _packageService;
-
         public string Name { get; set; }
         public long PackageDownloadCount { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

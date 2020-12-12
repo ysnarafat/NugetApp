@@ -15,7 +15,7 @@
     <article class="col-sm-8 package-details-main">
         <div class="package-title">
             <h1>
-                Newtonsoft.<wbr>Json
+                @Model.Name
                 <small class="text-nowrap">12.0.3</small>
 
                 <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-25x25.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
@@ -23,404 +23,9 @@
 
         </div>
 
-        <p>Json.NET is a popular high-performance JSON framework for .NET</p>
+        <p>@Model.PackageVersionDetails</p>
 
-        @*<div class="install-tabs">
-                <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="active">
-                        <a href="#package-manager" aria-expanded="true" id="package-manager-tab" class="package-manager-tab" aria-selected="true" aria-controls="package-manager" role="tab" data-toggle="tab" title="Switch to tab panel which contains package installation command for Package Manager">
-                            Package Manager
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#dotnet-cli" aria-expanded="false" id="dotnet-cli-tab" class="package-manager-tab" aria-selected="false" aria-controls="dotnet-cli" role="tab" data-toggle="tab" title="Switch to tab panel which contains package installation command for .NET CLI">
-                            .NET CLI
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#package-reference" aria-expanded="false" id="package-reference-tab" class="package-manager-tab" aria-selected="false" aria-controls="package-reference" role="tab" data-toggle="tab" title="Switch to tab panel which contains package installation command for PackageReference">
-                            PackageReference
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#paket-cli" aria-expanded="false" id="paket-cli-tab" class="package-manager-tab" aria-selected="false" aria-controls="paket-cli" role="tab" data-toggle="tab" title="Switch to tab panel which contains package installation command for Paket CLI">
-                            Paket CLI
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane active" id="package-manager">
-                        <div>
-                            <div class="install-script-row">
-                                <pre class="install-script" id="package-manager-text">Install-Package Newtonsoft.Json -Version 12.0.3</pre>
-                                <div class="copy-button">
-                                    <button id="package-manager-button" class="btn btn-default btn-warning" type="button" data-toggle="popover" data-placement="bottom" data-content="Copied." aria-label="Copy the Package Manager command" aria-live="polite" role="status" data-original-title="" title="">
-                                        <span class="ms-Icon ms-Icon--Copy" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane " id="dotnet-cli">
-                        <div>
-                            <div class="install-script-row">
-                                <pre class="install-script" id="dotnet-cli-text">dotnet add package Newtonsoft.Json --version 12.0.3</pre>
-                                <div class="copy-button">
-                                    <button id="dotnet-cli-button" class="btn btn-default btn-warning" type="button" data-toggle="popover" data-placement="bottom" data-content="Copied." aria-label="Copy the .NET CLI command" aria-live="polite" role="status" data-original-title="" title="">
-                                        <span class="ms-Icon ms-Icon--Copy" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane " id="package-reference">
-                        <div>
-                            <div class="install-script-row">
-                                <pre class="install-script" id="package-reference-text">&lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;</pre>
-                                <div class="copy-button">
-                                    <button id="package-reference-button" class="btn btn-default btn-warning" type="button" data-toggle="popover" data-placement="bottom" data-content="Copied." aria-label="Copy the PackageReference XML node" aria-live="polite" role="status" data-original-title="" title="">
-                                        <span class="ms-Icon ms-Icon--Copy" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="icon-text alert alert-info">
-                            <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i>
-
-                            For projects that support <a href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">PackageReference</a>, copy this XML node into the project file to reference the package.
-
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane " id="paket-cli">
-                        <div>
-                            <div class="install-script-row">
-                                <pre class="install-script" id="paket-cli-text">paket add Newtonsoft.Json --version 12.0.3</pre>
-                                <div class="copy-button">
-                                    <button id="paket-cli-button" class="btn btn-default btn-warning" type="button" data-toggle="popover" data-placement="bottom" data-content="Copied." aria-label="Copy the Paket CLI command" aria-live="polite" role="status" data-original-title="" title="">
-                                        <span class="ms-Icon ms-Icon--Copy" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="icon-text alert alert-warning">
-                            <i class="ms-Icon ms-Icon--Warning" aria-hidden="true"></i>
-
-                            The NuGet Team does not provide support for this client. Please contact its <a href="https://fsprojects.github.io/Paket/contact.html">maintainers</a> for support.
-
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
-        @*<h2>
-                <a href="#" role="button" data-toggle="collapse" data-target="#dependency-groups" aria-expanded="false" aria-controls="dependency-groups" id="show-dependency-groups">
-                    <i class="ms-Icon ms-Icon--ChevronRight" aria-hidden="true"></i>
-                    <span>Dependencies</span>
-                </a>
-            </h2>
-            <ul class="list-unstyled panel-collapse collapse dependency-groups" id="dependency-groups">
-                <li>
-                    <h4><span>.NETFramework 2.0</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETFramework 3.5</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETFramework 4.0</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETFramework 4.5</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETStandard 1.0</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            <a href="/packages/Microsoft.CSharp/">Microsoft.CSharp</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/NETStandard.Library/">NETStandard.Library</a>
-                            <span>(&gt;= 1.6.1)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.ComponentModel.TypeConverter/">System.ComponentModel.TypeConverter</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.Runtime.Serialization.Primitives/">System.Runtime.Serialization.Primitives</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETStandard 1.3</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            <a href="/packages/Microsoft.CSharp/">Microsoft.CSharp</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/NETStandard.Library/">NETStandard.Library</a>
-                            <span>(&gt;= 1.6.1)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.ComponentModel.TypeConverter/">System.ComponentModel.TypeConverter</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.Runtime.Serialization.Formatters/">System.Runtime.Serialization.Formatters</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.Runtime.Serialization.Primitives/">System.Runtime.Serialization.Primitives</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                        <li>
-                            <a href="/packages/System.Xml.XmlDocument/">System.Xml.XmlDocument</a>
-                            <span>(&gt;= 4.3.0)</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>.NETStandard 2.0</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>Portable Class Library (.NETFramework 4.0, Silverlight 5.0, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h4><span>Portable Class Library (.NETFramework 4.5, Windows 8.0, WindowsPhone 8.0, WindowsPhoneApp 8.1)</span></h4>
-                    <ul class="list-unstyled dependency-group">
-                        <li>
-                            No dependencies.
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h2>
-                <a href="#" role="button" data-toggle="collapse" data-target="#used-by" aria-expanded="false" aria-controls="used-by" id="show-used-by">
-                    <i class="ms-Icon ms-Icon--ChevronRight" aria-hidden="true"></i>
-                    <span>Used By</span>
-                </a>
-            </h2>
-            <div class="used-by panel-collapse collapse" id="used-by">
-                <h3>
-                    <strong>NuGet packages </strong> (28.9K)
-                </h3>
-                <p>
-                    Showing the top 5 NuGet packages that depend on Newtonsoft.Json:
-                </p>
-                <table class="table borderless">
-                    <thead>
-                        <tr>
-                            <th class="used-by-adjust-table-head">Package</th>
-                            <th class="used-by-adjust-table-head">Downloads</th>
-                        </tr>
-                    </thead>
-                    <tbody class="no-border">
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a class="text-left ngp-link" href="/packages/Microsoft.Extensions.DependencyModel/">
-                                    Microsoft.Extensions.DependencyModel
-                                </a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-14x14.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                                <div class="row used-by-desc">
-                                    <span>
-                                        Abstractions for reading `.deps` files.
-
-                                        Commonly Used Types:
-                                        Microsoft.Extensions.DependencyModel.DependencyContext
-
-                                        When using NuGet 3.x this package requires at least version 3.4.
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--Download used-by-download-icon" aria-hidden="true"></i> <label class="used-by-count">269.3M</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a class="text-left ngp-link" href="/packages/Microsoft.AspNetCore.JsonPatch/">
-                                    Microsoft.AspNetCore.JsonPatch
-                                </a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-14x14.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                                <div class="row used-by-desc">
-                                    <span>
-                                        ASP.NET Core support for JSON PATCH.
-
-                                        This package was built from the source code at https://github.com/dotnet/aspnetcore/tree/fc93e595ceffbb1e3e85532bf454e92a6a80dd6b
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--Download used-by-download-icon" aria-hidden="true"></i> <label class="used-by-count">167.6M</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a class="text-left ngp-link" href="/packages/Microsoft.AspNet.WebApi.Client/">
-                                    Microsoft.AspNet.WebApi.Client
-                                </a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-14x14.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                                <div class="row used-by-desc">
-                                    <span>This package adds support for formatting and content negotiation to System.Net.Http. It includes support for JSON, XML, and form URL encoded data.</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--Download used-by-download-icon" aria-hidden="true"></i> <label class="used-by-count">158.6M</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a class="text-left ngp-link" href="/packages/Microsoft.NET.Test.Sdk/">
-                                    Microsoft.NET.Test.Sdk
-                                </a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-14x14.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                                <div class="row used-by-desc">
-                                    <span>The MSbuild targets and properties for building .NET test projects.</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--Download used-by-download-icon" aria-hidden="true"></i> <label class="used-by-count">148.4M</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a class="text-left ngp-link" href="/packages/Microsoft.TestPlatform.TestHost/">
-                                    Microsoft.TestPlatform.TestHost
-                                </a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-14x14.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                                <div class="row used-by-desc">
-                                    <span>Testplatform host executes the test using specified adapter.</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--Download used-by-download-icon" aria-hidden="true"></i> <label class="used-by-count">142.3M</label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>
-                    <strong>GitHub repositories </strong> (2.1K)
-                </h3>
-                <p>
-                    Showing the top 5 popular GitHub repositories that depend on Newtonsoft.Json:
-                </p>
-                <table class="table borderless">
-                    <thead>
-                        <tr>
-                            <th class="used-by-adjust-table-head">Repository</th>
-                            <th class="used-by-adjust-table-head">Stars</th>
-                        </tr>
-                    </thead>
-                    <tbody class="no-border">
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a data-index-number="0" class="text-left gh-link" href="https://github.com/shadowsocks/shadowsocks-windows" target="_blank">
-                                    shadowsocks/shadowsocks-windows
-                                </a>
-                                <div class="row used-by-desc">
-                                    <span>If you want to keep a secret, you must also hide it from yourself.</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--FavoriteStarFill gh-star" aria-hidden="true"></i> <label class="used-by-count">51.1K</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a data-index-number="1" class="text-left gh-link" href="https://github.com/PowerShell/PowerShell" target="_blank">
-                                    PowerShell/PowerShell
-                                </a>
-                                <div class="row used-by-desc">
-                                    <span>PowerShell for every system!</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--FavoriteStarFill gh-star" aria-hidden="true"></i> <label class="used-by-count">23.4K</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a data-index-number="2" class="text-left gh-link" href="https://github.com/CodeHubApp/CodeHub" target="_blank">
-                                    CodeHubApp/CodeHub
-                                </a>
-                                <div class="row used-by-desc">
-                                    <span>CodeHub is an iOS application written using Xamarin</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--FavoriteStarFill gh-star" aria-hidden="true"></i> <label class="used-by-count">23.1K</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a data-index-number="3" class="text-left gh-link" href="https://github.com/Wox-launcher/Wox" target="_blank">
-                                    Wox-launcher/Wox
-                                </a>
-                                <div class="row used-by-desc">
-                                    <span>Launcher for Windows, an alternative to Alfred and Launchy.</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--FavoriteStarFill gh-star" aria-hidden="true"></i> <label class="used-by-count">19.1K</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="used-by-desc-column">
-                                <a data-index-number="4" class="text-left gh-link" href="https://github.com/dnSpy/dnSpy" target="_blank">
-                                    dnSpy/dnSpy
-                                </a>
-                                <div class="row used-by-desc">
-                                    <span>.NET debugger and assembly editor</span>
-                                </div>
-                            </td>
-                            <td>
-                                <i class="ms-Icon ms-Icon--FavoriteStarFill gh-star" aria-hidden="true"></i> <label class="used-by-count">16.7K</label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>*@
-
+        
         <h2>
             <a href="#" role="button" data-toggle="collapse" data-target="#version-history" aria-expanded="true" aria-controls="version-history" id="show-version-history">
                 <i class="ms-Icon ms-Icon--ChevronDown" aria-hidden="true"></i>
@@ -443,22 +48,22 @@
                     {
                         if (i == 0)
                         {
-                    <tr class="bg-info">
-                        <td>
-                            <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
-                                @Model.PackageVersionDetails[i].VersionNumber
-                            </a>
-                        </td>
-                        <td>
-                            @Model.PackageVersionDetails[i].VersionDownloadCount
-                        </td>
-                        <td>
-                            <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
-                        </td>
+                            <tr class="bg-info">
+                                <td>
+                                    <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                                        @Model.PackageVersionDetails[i].VersionNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model.PackageVersionDetails[i].VersionDownloadCount
+                                </td>
+                                <td>
+                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
+                                </td>
 
-                        <td class="package-icon-cell" aria-hidden="true"></td>
-                        <td 
-                    </tr>
+                                <td class="package-icon-cell" aria-hidden="true"></td>
+                                <td
+                            </tr>
                         }
                         else
                         {
@@ -501,7 +106,7 @@
                             </a>
                         </td>
                         <td>
-                            81,081,299
+                            @Model.PackageDownloadCount downloads
                         </td>
                         <td>
                             <span data-datetime="2018-03-24T20:18:14.7600000" title="2018-03-24T20:18:14Z">3/24/2018</span>
@@ -525,47 +130,16 @@
                         <td class="package-icon-cell" aria-hidden="true"></td>
                     </tr>
                 </tbody>
-                @*<tbody class="no-border collapse " id="hidden-versions">
-                        <tr>
-                            <td>
-                                <a href="/packages/Newtonsoft.Json/10.0.3" title="10.0.3">
-                                    10.0.3
-                                </a>
-                            </td>
-                            <td>
-                                107,419,198
-                            </td>
-                            <td>
-                                <span data-datetime="2017-06-18T02:10:29.6030000" title="2017-06-18T02:10:29Z">6/18/2017</span>
-                            </td>
-
-                            <td class="package-icon-cell" aria-hidden="true"></td>
-                        </tr>
-                        
-                        
-                        <tr>
-                            <td>
-                                <a href="/packages/Newtonsoft.Json/3.5.8" title="3.5.8">
-                                    3.5.8
-                                </a>
-                            </td>
-                            <td>
-                                575,673
-                            </td>
-                            <td>
-                                <span data-datetime="2011-01-08T22:12:57.7130000" title="2011-01-08T22:12:57Z">1/8/2011</span>
-                            </td>
-
-                            <td class="package-icon-cell" aria-hidden="true"></td>
-                        </tr>
-                    </tbody>*@
             </table>
-            @*<a href="#" role="button" data-toggle="collapse" class="icon-link" data-target="#hidden-versions" aria-expanded="false" aria-controls="hidden-versions" id="show-hidden-versions">
-                <i class="ms-Icon ms-Icon--CalculatorAddition" aria-hidden="true"></i>
-                <span>Show more</span>
-            </a>*@
         </div>
+        @if (User.Identity.Name == Model.ApplicationUser.UserName)
+        {
+            <a href="~/Package/Upload">
+                Upload New Version of this Package
+            </a>
+        }
     </article>
+   
     <aside aria-label="Package details info" class="col-sm-3 package-details-info">
         <h2>Info</h2>
         <ul class="list-unstyled ms-Icon-ul">
@@ -573,50 +147,13 @@
                 <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
                 last updated <span data-datetime="2019-11-09T01:27:30.7230000" title="2019-11-09T01:27:30Z">11/9/2019</span>
             </li>
-            @*<li>
-                    <i class="ms-Icon ms-Icon--Globe" aria-hidden="true"></i>
-                    <a href="https://www.newtonsoft.com/json" data-track="outbound-project-url" title="Visit the project site to learn more about this package" rel="nofollow">
-                        Project Site
-                    </a>
-                </li>
-                <li>
-                    <img class="icon" aria-hidden="true" alt="Git logo" src="https://www.nuget.org/Content/gallery/img/git.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/git-32x32.png'; this.onerror = null;">
-
-                    <a href="https://github.com/JamesNK/Newtonsoft.Json" data-track="outbound-repository-url" title="View the source code for this package" rel="nofollow">
-                        Source repository
-                    </a>
-                </li>
-                <li>
-                    <i class="ms-Icon ms-Icon--Certificate" aria-hidden="true"></i>
-                    License:
-                    <a href="https://licenses.nuget.org/MIT" aria-label="License MIT">MIT</a>
-                </li>*@
-            @*<li>
-                    <i class="ms-Icon ms-Icon--Mail" aria-hidden="true"></i>
-                    <a href="/packages/Newtonsoft.Json/12.0.3/ContactOwners" title="Ask the package owners a question">Contact owners</a>
-                </li>
-                <li>
-                    <i class="ms-Icon ms-Icon--Flag" aria-hidden="true"></i>
-                    <a href="/packages/Newtonsoft.Json/12.0.3/ReportAbuse" title="Report the package as abusive">
-                        Report
-                    </a>
-                </li>*@
-
+            
             <li>
                 <i class="ms-Icon ms-Icon--CloudDownload" aria-hidden="true"></i>
                 <a href="https://www.nuget.org/api/v2/package/Newtonsoft.Json/12.0.3" data-track="outbound-manual-download" title="Download the raw nupkg file." rel="nofollow">Download package</a>
                 &nbsp;(2.48 MB)
             </li>
-            @*<li>
-                    <i class="ms-Icon ms-Icon--CloudDownload" aria-hidden="true"></i>
-                    <a href="https://www.nuget.org/api/v2/symbolpackage/Newtonsoft.Json/12.0.3" data-track="outbound-manual-download" title="Download the raw snupkg file." rel="nofollow">Download symbols</a>
-                    &nbsp;(887.73 KB)
-                </li>
-                <li class="no-clickonce">
-                    <i class="ms-Icon ms-Icon--OpenInNewWindow" aria-hidden="true"></i>
-                    <a href="https://npe.codeplex.com/releases/clickonce/NuGetPackageExplorer.application?url=https://www.nuget.org/api/v2/package/Newtonsoft.Json/&amp;id=Newtonsoft.Json&amp;version=12.0.3" title="Explore the nupkg with the NuGet Package Explorer (IE only)" rel="nofollow">Open in Package Explorer</a>
-                </li>*@
-
+            
 
 
 
@@ -626,7 +163,7 @@
         <ul class="list-unstyled ms-Icon-ul">
             <li>
                 <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
-                @Model.PackageDownloadCount
+                @Model.PackageDownloadCount downloads
             </li>
             <li>
                 <i class="ms-Icon ms-Icon--Giftbox" aria-hidden="true"></i>

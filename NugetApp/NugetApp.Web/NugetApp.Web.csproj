@@ -206,7 +206,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
-    <Compile Include="DTOs\PackageDetails.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,6 +213,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PackageModels\PackageDetailsModel.cs" />
+    <Compile Include="Models\PackageModels\PackageModel.cs" />
     <Compile Include="Models\PackageModels\PackageUploadModel.cs" />
     <Compile Include="Models\PackageModels\PackageVersionDetailsModel.cs" />
     <Compile Include="Models\PackageModels\PackageViewModel.cs" />
