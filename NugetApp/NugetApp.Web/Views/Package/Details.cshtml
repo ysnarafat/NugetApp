@@ -1,0 +1,204 @@
+﻿@model NugetApp.Web.Models.PackageModels.PackageDetailsModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <aside aria-label="Package icon" class="col-sm-1">
+        <h3>
+            <img class="package-icon img-responsive" aria-hidden="true" alt="" src="https://api.nuget.org/v3-flatcontainer/newtonsoft.json/12.0.3/icon" onerror="this.src='https://www.nuget.org/Content/gallery/img/default-package-icon-256x256.png'; this.onerror = null;">
+        </h3>
+    </aside>
+    <article class="col-sm-8 package-details-main">
+        <div class="package-title">
+            <h1>
+                @Model.Name
+                <small class="text-nowrap">12.0.3</small>
+
+                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-25x25.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
+            </h1>
+
+        </div>
+
+        <p>@Model.PackageVersionDetails</p>
+
+        
+        <h2>
+            <a href="#" role="button" data-toggle="collapse" data-target="#version-history" aria-expanded="true" aria-controls="version-history" id="show-version-history">
+                <i class="ms-Icon ms-Icon--ChevronDown" aria-hidden="true"></i>
+                <span>Version History</span>
+            </a>
+        </h2>
+        <div class="version-history panel-collapse collapse in" aria-expanded="true" id="version-history">
+            <table aria-label="Version History of Newtonsoft.Json" class="table borderless">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Downloads</th>
+                        <th>Last updated</th>
+                        <th>Action</th>
+                        <th aria-hidden="true" abbr="Deprecation Information"></th>
+                    </tr>
+                </thead>
+                <tbody class="no-border">
+                    @for (int i = 0; i < Model.PackageVersionDetails.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <tr class="bg-info">
+                                <td>
+                                    <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                                        @Model.PackageVersionDetails[i].VersionNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model.PackageVersionDetails[i].VersionDownloadCount
+                                </td>
+                                <td>
+                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
+                                </td>
+
+                                <td class="package-icon-cell" aria-hidden="true"></td>
+                                <td
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                                        @Model.PackageVersionDetails[i].VersionNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model.PackageVersionDetails[i].VersionDownloadCount
+                                </td>
+                                <td>
+                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
+                                </td>
+
+                                <td class="package-icon-cell" aria-hidden="true"></td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td>
+                            <a href="/packages/Newtonsoft.Json/12.0.1" title="12.0.1">
+                                12.0.1
+                            </a>
+                        </td>
+                        <td>
+                            53,165,149
+                        </td>
+                        <td>
+                            <span data-datetime="2018-11-27T18:11:37.0800000" title="2018-11-27T18:11:37Z">11/27/2018</span>
+                        </td>
+
+                        <td class="package-icon-cell" aria-hidden="true"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/packages/Newtonsoft.Json/11.0.2" title="11.0.2">
+                                11.0.2
+                            </a>
+                        </td>
+                        <td>
+                            @Model.PackageDownloadCount downloads
+                        </td>
+                        <td>
+                            <span data-datetime="2018-03-24T20:18:14.7600000" title="2018-03-24T20:18:14Z">3/24/2018</span>
+                        </td>
+
+                        <td class="package-icon-cell" aria-hidden="true"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/packages/Newtonsoft.Json/11.0.1" title="11.0.1">
+                                11.0.1
+                            </a>
+                        </td>
+                        <td>
+                            35,328,852
+                        </td>
+                        <td>
+                            <span data-datetime="2018-02-17T20:59:20.7730000" title="2018-02-17T20:59:20Z">2/17/2018</span>
+                        </td>
+
+                        <td class="package-icon-cell" aria-hidden="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @if (User.Identity.Name == Model.ApplicationUser.UserName)
+        {
+            <a href="~/Package/Upload">
+                Upload New Version of this Package
+            </a>
+        }
+    </article>
+   
+    <aside aria-label="Package details info" class="col-sm-3 package-details-info">
+        <h2>Info</h2>
+        <ul class="list-unstyled ms-Icon-ul">
+            <li>
+                <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
+                last updated <span data-datetime="2019-11-09T01:27:30.7230000" title="2019-11-09T01:27:30Z">11/9/2019</span>
+            </li>
+            
+            <li>
+                <i class="ms-Icon ms-Icon--CloudDownload" aria-hidden="true"></i>
+                <a href="https://www.nuget.org/api/v2/package/Newtonsoft.Json/12.0.3" data-track="outbound-manual-download" title="Download the raw nupkg file." rel="nofollow">Download package</a>
+                &nbsp;(2.48 MB)
+            </li>
+            
+
+
+
+        </ul>
+
+        <h2>Statistics</h2>
+        <ul class="list-unstyled ms-Icon-ul">
+            <li>
+                <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
+                @Model.PackageDownloadCount downloads
+            </li>
+            <li>
+                <i class="ms-Icon ms-Icon--Giftbox" aria-hidden="true"></i>
+                73,994,180 downloads
+                of current version
+            </li>
+        </ul>
+
+        <h2>Owners</h2>
+        <ul class="list-unstyled owner-list">
+            <li>
+                <a href="mailto:" title="">
+                    @Model.ApplicationUser.Email
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+</div>
+
+
+<script>
+    $(function () {
+        $('download').click(function () {
+            $.ajax(
+                {
+                    url: '@Url.Action("Download","Package")',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: {
+                        id: 1
+                    },
+                    type: 'GET',
+                    success: alert('Success')
+                });
+        });
+    });
+</script>

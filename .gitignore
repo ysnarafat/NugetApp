@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/NugetApp/.vs
+/NugetApp/NugetApp.Core/bin
+/NugetApp/NugetApp.Core/obj
+/NugetApp/packages

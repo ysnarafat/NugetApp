@@ -1,16 +1,48 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+
+    <ul class="nav navbar-nav navbar-right" role="tablist">
+        <li class="dropdown" role="presentation">
+            <a href="#" aria-selected="false" role="tab" id="account-dropdown" class="dropdown-toggle" title="Open profile dropdown" data-toggle="dropdown" aria-expanded="false">
+                <div>
+                    <b><span>@User.Identity.GetUserName()</span></b>
+                    <span class="caret"></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="account-dropdown">
+                <li class="dropdown-header row">
+                    <div class="col-sm-9 dropdown-profile">
+                        <span class="dropdown-username">@User.Identity.GetUserName()</span>
+                    </div>
+                </li>
+                <li class="divider"></li>
+                <li role="presentation"><a href="/profiles/ysnarafat" role="menuitem">View Profile</a></li>
+                <li role="presentation"><a href="/Package/Upload" role="menuitem">My Packages</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                <li class="divider"></li>
+                
+            </ul>
+        </li>
+    </ul>
+
+
+
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @*<ul class="nav navbar-nav navbar-right">
+            <option>
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
+            </option>
+
+        </ul>*@
     }
 }
 else
