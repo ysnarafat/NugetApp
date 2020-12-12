@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NugetApp.Core.Entities;
 using System.Configuration;
+using NugetApp.Core.Mappings;
 
 namespace NugetApp.Core.Contexts
 {
@@ -31,9 +32,10 @@ namespace NugetApp.Core.Contexts
 
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
 
-
             FluentConfiguration _config = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString))
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<PackageMapping>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<PackageVersionMapping>())
                 .ExposeConfiguration(cfg =>
                 {
                     cfg.AddDeserializedMapping(MappingHelper.GetIdentityMappings(myEntities), null);
