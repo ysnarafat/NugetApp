@@ -17,10 +17,17 @@ namespace NugetApp.Web.Models.PackageModels
         [Required]
         //Microsoft.Web.Mvc.FileExtensions(Extensions = "csv",
         //     ErrorMessage = "Specify a CSV file. (Comma-separated values)")]
-        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$", ErrorMessage = "Only Image files allowed.")]
-        public HttpPostedFileBase file { get; set; }
+        //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.zip|.exe|.nupkg)$", ErrorMessage = "Only Zip files allowed.")]
+        public HttpPostedFileBase File { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
+        public string Version { get; set; }
 
         private readonly IPackageService _packageService;
 
@@ -41,56 +48,27 @@ namespace NugetApp.Web.Models.PackageModels
                 Name = Name,
                 PackageDownloadCount = 0,
                 ApplicationUser = user,
+                Description = Description
             };
+
+            var filePath = StoreFile();
 
             package.PackageVersions = new List<PackageVersion>
             {
-                    new PackageVersion
-                    {
-                        Description = "Test",
-                        VersionDownloadCount = 0,
-                        CreatedAt = DateTime.Now,
-                        Package = package
-                    }
+                new PackageVersion
+                {
+                    VersionDownloadCount = 0,
+                    CreatedAt = DateTime.Now.Date,
+                    VersionNumber = Version,
+                    FilePath = filePath,
+                    Package = package
+                }
             };
 
-            //Path.G
-            //if (!Directory.Exists(Path.Combine("~/UploadedFiles", "test")))
-            //{
-            //    Directory.CreateDirectory(Path.Combine("~/UploadedFiles", "test"));
-            //}
-
-            //var path = Path.Combine("~/UploadedFiles", "test");
-
-            //if (!File.Exists(path))
-            //{
-            //    var profileImage = File.OpenWrite(path);
-            //    //var uploadFile = File.OpenReadStream();
-            //    //uploadFile.CopyTo(profileImage);
-            //}
-
-            var uploadDir = "~/Uploads";
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(uploadDir));
-            //string path = Path.Combine("~/Uploads");
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            var postedFile = file;
-
-            if (postedFile != null)
-            {
-                string filePath = Path.Combine(path,postedFile.FileName);
-                postedFile.SaveAs(filePath);
-                //ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
-            }
-
-            _packageService.Upload(package);
+            await _packageService.Upload(package);
         }
 
-        public async Task Delete(int  userName)
+        public async Task Delete(int userName)
         {
             //var user = await _applicationUserManager.FindByEmailAsync(userName);
 
@@ -113,6 +91,32 @@ namespace NugetApp.Web.Models.PackageModels
             //};
 
             _packageService.Delete(userName);
+        }
+
+        private string StoreFile()
+        {
+            string filePath;
+            var uploadDir = "~/Uploads";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(uploadDir));
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            var postedFile = File;
+
+            if (postedFile != null)
+            {
+                filePath = Path.Combine(path, postedFile.FileName);
+                postedFile.SaveAs(filePath);
+            }
+            else
+            {
+                throw new Exception("File cannot be null.");
+            }
+
+            return filePath;
         }
     }
 }

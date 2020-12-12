@@ -117,6 +117,8 @@
     <Compile Include="AutofacModule.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Contexts\FluentNHibernateDbContext.cs" />
+    <Compile Include="DTOs\PackageDTO.cs" />
+    <Compile Include="DTOs\PackageVersionDTO.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\PackageVersion.cs" />

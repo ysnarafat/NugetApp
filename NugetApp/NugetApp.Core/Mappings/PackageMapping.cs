@@ -14,6 +14,7 @@ namespace NugetApp.Core.Mappings
         {
             Id(p => p.Id).GeneratedBy.Identity();
             Map(p => p.Name);
+            Map(p => p.Description);
             Map(p => p.PackageDownloadCount);
             References(p => p.ApplicationUser);
             HasMany(p => p.PackageVersions).Cascade.AllDeleteOrphan();

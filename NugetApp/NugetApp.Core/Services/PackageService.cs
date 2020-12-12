@@ -3,6 +3,8 @@ using NugetApp.Core.UnitofWorks;
 using NHibernate;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NugetApp.Core.DTOs;
+using System;
 
 namespace NugetApp.Core.Services
 {
@@ -19,6 +21,7 @@ namespace NugetApp.Core.Services
         public async Task Upload(Package package)
         {
             await _packageUnitofWork.PackageRepository.Create(package);
+
         }
 
         public async Task Delete(int id)
@@ -34,14 +37,45 @@ namespace NugetApp.Core.Services
             return list;
         }
 
+        public IList<Package> GetPackagesOfUserId(ApplicationUser user)
+        {
+            var list = _packageUnitofWork.PackageRepository.Get(x => x.ApplicationUser.Id == user.Id);
+
+            return list;
+        }
+
         public async Task UploadFile()
         {
 
         }
 
-        public void GetPackageDetails(int id)
+        public async Task<PackageDTO> GetPackageDetails(int id)
         {
-            throw new System.NotImplementedException();
+            var package = await _packageUnitofWork.PackageRepository.Get(id);
+
+            if (package == null) throw new NullReferenceException("Package not found");
+
+            var packageDTO = new PackageDTO
+            {
+                ApplicationUser = package.ApplicationUser,
+                Name = package.Name,
+                PackageDownloadCount = package.PackageDownloadCount,
+                PackagerVersions = new List<PackageVersionDTO>()
+            };
+
+            foreach(var item in package.PackageVersions)
+            {
+                var packageVesion = new PackageVersionDTO
+                {
+                    CreatedAt = item.CreatedAt,
+                    FilePath = item.FilePath,
+                    VersionDownloadCount = item.VersionDownloadCount,
+                    VersionNumber = item.VersionNumber
+                };
+                packageDTO.PackagerVersions.Add(packageVesion);
+            }
+
+            return packageDTO;
         }
     }
 }

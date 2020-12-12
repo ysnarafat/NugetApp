@@ -1,4 +1,5 @@
-﻿using NugetApp.Core.Entities;
+﻿using NugetApp.Core.DTOs;
+using NugetApp.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace NugetApp.Core.Services
         Task Upload(Package package);
         Task Delete(int id);
         IList<Package> GetAllPackages();
-        void GetPackageDetails(int id);
+        Task<PackageDTO> GetPackageDetails(int id);
+        IList<Package> GetPackagesOfUserId(ApplicationUser user);
     } 
 }

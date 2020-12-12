@@ -213,7 +213,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PackageModels\PackageDetailsModel.cs" />
     <Compile Include="Models\PackageModels\PackageUploadModel.cs" />
+    <Compile Include="Models\PackageModels\PackageVersionDetailsModel.cs" />
     <Compile Include="Models\PackageModels\PackageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -277,6 +279,9 @@
     <Content Include="Views\Shared\_NavBarPartial.cshtml" />
     <Content Include="Views\Package\Upload.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
+    <Content Include="Views\Package\Details.cshtml" />
+    <Content Include="Views\Package\MyPackages.cshtml" />
+    <Content Include="Views\Shared\_ResponseMessagePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

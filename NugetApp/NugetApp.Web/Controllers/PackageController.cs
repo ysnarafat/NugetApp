@@ -10,37 +10,62 @@ namespace NugetApp.Web.Controllers
 {
     public class PackageController : Controller
     {
-        // GET: Upload
+        [HttpGet]
         public ActionResult Index()
         {
             var model = new PackageViewModel();
             model.GetAllPackages();
+
             return View(model);
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> Upload()
+        public ActionResult Upload()
         {
             var model = new PackageUploadModel();
-            //await model.Create(User.Identity.Name);
             return View(model);
         }
 
         [HttpPost]
         public async Task<ActionResult> Upload(PackageUploadModel model)
         {
-            var name = model.file.FileName;
-            Console.WriteLine(name);
-            await model.Create(User.Identity.Name);
+            try
+            {
+                await model.Create(User.Identity.Name);
+                TempData["SuccessNotify"] = "Successfully uploaded your pacakage";
+            }
+            catch
+            {
+                TempData["ErrorNotify"] = "An error occured while uploading pacakage";
+            }
+
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public void Delete()
         {
             var model = new PackageUploadModel();
             
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> MyPackages()
+        {
+            var model = new PackageViewModel();
+            try
+            {
+                await model.GetPackageByUser(User.Identity.Name);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            return View(model);
         }
 
         [HttpPost]
@@ -51,13 +76,12 @@ namespace NugetApp.Web.Controllers
         }
 
         [HttpGet]
-        public void Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            var model = PackageViewModel();
-            model.
+            var model = new PackageDetailsModel();
+            await model.GetPackageDetails(id);
 
+            return View(model);
         }
-
-
     }
 }

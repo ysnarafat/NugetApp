@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NugetApp.Core.Entities
+namespace NugetApp.Core.DTOs
 {
-    public class PackageVersion
+    public class PackageVersionDTO
     {
-        public virtual int Id { get; set; }
-        //public virtual string Description { get; set; }
         public virtual string VersionNumber { get; set; }
         public virtual string FilePath { get; set; }
         public virtual long VersionDownloadCount { get; set; }
         public virtual DateTime CreatedAt { get; set; }
-        public virtual Package Package { get; set; }
     }
 }
