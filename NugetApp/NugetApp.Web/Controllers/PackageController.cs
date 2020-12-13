@@ -33,11 +33,37 @@ namespace NugetApp.Web.Controllers
             try
             {
                 await model.Create(User.Identity.Name);
-                TempData["SuccessNotify"] = "Successfully uploaded your pacakage";
+                TempData["SuccessNotify"] = "Successfully uploaded your package";
             }
             catch
             {
-                TempData["ErrorNotify"] = "An error occured while uploading pacakage";
+                TempData["ErrorNotify"] = "An error occured while uploading package";
+            }
+
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> UploadNewVersion(int id)
+        {
+            var model = new PackageUploadModel();
+            await model.LoadPackageData(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UploadNewVersion(PackageUploadModel model)
+        {
+            try
+            {
+                await model.CreateNewVersion(User.Identity.Name);
+                TempData["SuccessNotify"] = "Successfully uploaded your package";
+            }
+            catch
+            {
+                TempData["ErrorNotify"] = "An error occured while uploading package";
             }
 
             return View(model);

@@ -23,9 +23,8 @@
 
         </div>
 
-        <p>@Model.PackageVersionDetails</p>
+        <p>@Model.Description</p>
 
-        
         <h2>
             <a href="#" role="button" data-toggle="collapse" data-target="#version-history" aria-expanded="true" aria-controls="version-history" id="show-version-history">
                 <i class="ms-Icon ms-Icon--ChevronDown" aria-hidden="true"></i>
@@ -134,12 +133,34 @@
         </div>
         @if (User.Identity.Name == Model.ApplicationUser.UserName)
         {
-            <a href="~/Package/Upload">
+            <a href="~/Package/UploadNewVersion/@Model.Id">
                 Upload New Version of this Package
             </a>
+            @*using (Html.BeginForm("UploadNewVersion", "Package", new { id = Model.Id }, FormMethod.Get))
+            {
+                <button type="submit" class="btn btn-primary">
+                    Upload new version
+                </button>
+            }*@
+
+
+            @*@Html.ActionLink("Upload", "UploadNewVersion", "Package",new { @packageId = Model.Id})*@
+
+   
+                    <!--<div class="form-group row">
+                        <div class="col-md-8">
+                            <input type="submit" class="btn btn-primary" id="btn_submit" value="Upload" />
+                        </div>
+                    </div>
+                }
+            </div>-->
+
+
+
+
         }
     </article>
-   
+
     <aside aria-label="Package details info" class="col-sm-3 package-details-info">
         <h2>Info</h2>
         <ul class="list-unstyled ms-Icon-ul">
@@ -147,13 +168,13 @@
                 <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
                 last updated <span data-datetime="2019-11-09T01:27:30.7230000" title="2019-11-09T01:27:30Z">11/9/2019</span>
             </li>
-            
+
             <li>
                 <i class="ms-Icon ms-Icon--CloudDownload" aria-hidden="true"></i>
                 <a href="https://www.nuget.org/api/v2/package/Newtonsoft.Json/12.0.3" data-track="outbound-manual-download" title="Download the raw nupkg file." rel="nofollow">Download package</a>
                 &nbsp;(2.48 MB)
             </li>
-            
+
 
 
 

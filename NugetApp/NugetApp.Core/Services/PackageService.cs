@@ -49,6 +49,12 @@ namespace NugetApp.Core.Services
 
         }
 
+        public async Task<Package> GetPackageById(int packageId)
+        {
+            var package = await _packageUnitofWork.PackageRepository.Get(packageId);
+            return package;
+        }
+
         public async Task<PackageDTO> GetPackageDetails(int id)
         {
             var package = await _packageUnitofWork.PackageRepository.Get(id);
@@ -57,10 +63,11 @@ namespace NugetApp.Core.Services
 
             var packageDTO = new PackageDTO
             {
+                Id = package.Id,
                 ApplicationUser = package.ApplicationUser,
                 Name = package.Name,
                 PackageDownloadCount = package.PackageDownloadCount,
-                PackagerVersions = new List<PackageVersionDTO>()
+                PackageVersions = new List<PackageVersionDTO>()
             };
 
             foreach(var item in package.PackageVersions)
@@ -72,10 +79,15 @@ namespace NugetApp.Core.Services
                     VersionDownloadCount = item.VersionDownloadCount,
                     VersionNumber = item.VersionNumber
                 };
-                packageDTO.PackagerVersions.Add(packageVesion);
+                packageDTO.PackageVersions.Add(packageVesion);
             }
 
             return packageDTO;
+        }
+
+        public async Task UploadNewVersion(Package package)
+        {
+            await _packageUnitofWork.PackageRepository.Update(package);
         }
     }
 }

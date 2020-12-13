@@ -23,6 +23,8 @@ namespace NugetApp.Web.Models.PackageModels
         [Required]
         public string Name { get; set; }
 
+        public int Id { get; set; }
+
         [Required]
         public string Description { get; set; }
 
@@ -70,30 +72,41 @@ namespace NugetApp.Web.Models.PackageModels
             await _packageService.Upload(package);
         }
 
-        //public async Task Delete(int userName)
-        //{
-        //    //var user = await _applicationUserManager.FindByEmailAsync(userName);
+        public async Task CreateNewVersion(string userName)
+        {
+            var user = await _applicationUserManager.FindByEmailAsync(userName);
 
-        //    //var package = new Package
-        //    //{
-        //    //    Name = Name,
-        //    //    PackageDownloadCount = 0,
-        //    //    ApplicationUser = user,
-        //    //};
+            if (user == null) throw new InvalidOperationException("User cannot be null.");
 
-        //    //package.PackageVersions = new List<PackageVersion>
-        //    //{
-        //    //        new PackageVersion
-        //    //        {
-        //    //            Description = "Test",
-        //    //            VersionDownloadCount = 0,
-        //    //            CreatedAt = DateTime.Now,
-        //    //            Package = package
-        //    //        }
-        //    //};
+            var package = await _packageService.GetPackageById(Id);
+            package.ApplicationUser = user;
+            package.Description = Description;
 
-        //    _packageService.Delete(userName);
-        //}
+            var filePath = StoreFile();
+
+            package.PackageVersions = new List<PackageVersion>
+            {
+                new PackageVersion
+                {
+                    VersionDownloadCount = 0,
+                    CreatedAt = DateTime.Now.Date,
+                    VersionNumber = Version,
+                    FilePath = filePath,
+                    Package = package
+                }
+            };
+
+            await _packageService.UploadNewVersion(package);
+        }
+
+        public async Task LoadPackageData(int  pacakgeId)
+        {
+            var package = await _packageService.GetPackageById(pacakgeId);
+
+            Id = package.Id;
+            Name = package.Name;
+            Description = package.Description;
+        }
 
         private string StoreFile()
         {

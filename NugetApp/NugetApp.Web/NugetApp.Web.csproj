@@ -282,10 +282,10 @@
     <Content Include="Views\Package\Details.cshtml" />
     <Content Include="Views\Package\MyPackages.cshtml" />
     <Content Include="Views\Shared\_ResponseMessagePartial.cshtml" />
+    <Content Include="Views\Package\UploadNewVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

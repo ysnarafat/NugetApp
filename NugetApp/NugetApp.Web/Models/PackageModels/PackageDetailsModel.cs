@@ -13,7 +13,10 @@ namespace NugetApp.Web.Models.PackageModels
     public class PackageDetailsModel
     {
         private readonly IPackageService _packageService;
+
+        public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public long PackageDownloadCount { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public IList<PackageVersionDetailsModel> PackageVersionDetails { get; set; }
@@ -22,6 +25,7 @@ namespace NugetApp.Web.Models.PackageModels
         {
             _packageService = DependencyResolver.Current.GetService<IPackageService>();
         }
+
         public async Task GetPackageDetails(int id)
         {
             var package = await _packageService.GetPackageDetails(id);
@@ -30,12 +34,14 @@ namespace NugetApp.Web.Models.PackageModels
 
         private void PopulatePackageDetails(PackageDTO packageDTO)
         {
+            Id = packageDTO.Id;
             Name = packageDTO.Name;
+            Description = packageDTO.Description;
             PackageDownloadCount = packageDTO.PackageDownloadCount;
             ApplicationUser = packageDTO.ApplicationUser;
             PackageVersionDetails = new List<PackageVersionDetailsModel>();
 
-            foreach(var item in packageDTO.PackagerVersions)
+            foreach(var item in packageDTO.PackageVersions)
             {
                 var packageVersion = new PackageVersionDetailsModel();
                 packageVersion.CreatedAt = item.CreatedAt;

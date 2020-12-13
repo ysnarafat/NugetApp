@@ -14,6 +14,8 @@ namespace NugetApp.Core.Services
         Task Delete(int id);
         IList<Package> GetAllPackages();
         Task<PackageDTO> GetPackageDetails(int id);
+        Task<Package> GetPackageById(int packageId);
         IList<Package> GetPackagesOfUserId(ApplicationUser user);
+        Task UploadNewVersion(Package package);
     } 
 }
