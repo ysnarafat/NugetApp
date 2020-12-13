@@ -13,7 +13,7 @@ namespace NugetApp.Core.Services
         private IPackageUnitofWork _packageUnitofWork;
 
         private readonly ISession _session;
-        public PackageService(IPackageUnitofWork packageUnitofWork, ISession session)
+        public PackageService(IPackageUnitofWork packageUnitofWork,ISession session)
         {
             _packageUnitofWork = packageUnitofWork;
             _session = session;
@@ -44,11 +44,6 @@ namespace NugetApp.Core.Services
             return list;
         }
 
-        public async Task UploadFile()
-        {
-
-        }
-
         public async Task<Package> GetPackageById(int packageId)
         {
             var package = await _packageUnitofWork.PackageRepository.Get(packageId);
@@ -74,6 +69,7 @@ namespace NugetApp.Core.Services
             {
                 var packageVesion = new PackageVersionDTO
                 {
+                    Id = item.Id,
                     CreatedAt = item.CreatedAt,
                     FilePath = item.FilePath,
                     VersionDownloadCount = item.VersionDownloadCount,
@@ -85,9 +81,31 @@ namespace NugetApp.Core.Services
             return packageDTO;
         }
 
-        public async Task UploadNewVersion(Package package)
+        public async Task UploadNewVersion(Package package,PackageVersion packageVersion)
         {
             await _packageUnitofWork.PackageRepository.Update(package);
+            await _packageUnitofWork.PackageVersionRepository.Create(packageVersion);
+        }
+
+        public async Task<PackageVersion> GetPackageVersionById(int packageVersionId)
+        {
+            var packageVersion = await _packageUnitofWork.PackageVersionRepository.Get(packageVersionId);
+            return packageVersion;
+        }
+
+        public async Task UpdateDownloadCount(Package package, PackageVersion packageVersion)
+        {
+            _packageUnitofWork.BeginTransaction(_session);
+            try
+            {
+                await _packageUnitofWork.PackageRepository.Update(package);
+                await _packageUnitofWork.PackageVersionRepository.Update(packageVersion);
+                _packageUnitofWork.Commit();
+            }
+            catch
+            {
+                _packageUnitofWork.Rollback();
+            }
         }
     }
 }

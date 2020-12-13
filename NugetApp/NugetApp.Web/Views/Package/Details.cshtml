@@ -47,153 +47,74 @@
                     {
                         if (i == 0)
                         {
-                            <tr class="bg-info">
-                                <td>
-                                    <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
-                                        @Model.PackageVersionDetails[i].VersionNumber
-                                    </a>
-                                </td>
-                                <td>
-                                    @Model.PackageVersionDetails[i].VersionDownloadCount
-                                </td>
-                                <td>
-                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
-                                </td>
+                    <tr class="bg-info">
+                        <td>
+                            <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                                @Model.PackageVersionDetails[i].VersionNumber
+                            </a>
+                        </td>
+                        <td>
+                            @Model.PackageVersionDetails[i].VersionDownloadCount
+                        </td>
+                        <td>
+                            <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
+                        </td>
+                        <td>
+                            <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
+                            @*<button id="download" class="btn btn-primary">download</button>*@
+                            <a class="download" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
+                        </td>
+                        <td class="package-icon-cell" aria-hidden="true"></td>
 
-                                <td class="package-icon-cell" aria-hidden="true"></td>
-                                <td
-                            </tr>
+                    </tr>
                         }
                         else
                         {
-                            <tr>
-                                <td>
-                                    <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
-                                        @Model.PackageVersionDetails[i].VersionNumber
-                                    </a>
-                                </td>
-                                <td>
-                                    @Model.PackageVersionDetails[i].VersionDownloadCount
-                                </td>
-                                <td>
-                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date" title="@Model.PackageVersionDetails[i].CreatedAt.Date">@Model.PackageVersionDetails[i].CreatedAt.Date</span>
-                                </td>
+                <tr>
+                    <td>
+                        <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                            @Model.PackageVersionDetails[i].VersionNumber
+                        </a>
+                    </td>
+                    <td>
+                        @Model.PackageVersionDetails[i].VersionDownloadCount
+                    </td>
+                    <td>
+                        <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
+                    </td>
+                    <td>
+                        <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
+                        @*<button id="download" class="btn btn-primary">download</button>*@
+                        <a class="download" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
+                    </td>
+                    <td class="package-icon-cell" aria-hidden="true"></td>
 
-                                <td class="package-icon-cell" aria-hidden="true"></td>
-                            </tr>
+                </tr>
                         }
                     }
-                    <tr>
-                        <td>
-                            <a href="/packages/Newtonsoft.Json/12.0.1" title="12.0.1">
-                                12.0.1
-                            </a>
-                        </td>
-                        <td>
-                            53,165,149
-                        </td>
-                        <td>
-                            <span data-datetime="2018-11-27T18:11:37.0800000" title="2018-11-27T18:11:37Z">11/27/2018</span>
-                        </td>
-
-                        <td class="package-icon-cell" aria-hidden="true"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="/packages/Newtonsoft.Json/11.0.2" title="11.0.2">
-                                11.0.2
-                            </a>
-                        </td>
-                        <td>
-                            @Model.PackageDownloadCount downloads
-                        </td>
-                        <td>
-                            <span data-datetime="2018-03-24T20:18:14.7600000" title="2018-03-24T20:18:14Z">3/24/2018</span>
-                        </td>
-
-                        <td class="package-icon-cell" aria-hidden="true"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="/packages/Newtonsoft.Json/11.0.1" title="11.0.1">
-                                11.0.1
-                            </a>
-                        </td>
-                        <td>
-                            35,328,852
-                        </td>
-                        <td>
-                            <span data-datetime="2018-02-17T20:59:20.7730000" title="2018-02-17T20:59:20Z">2/17/2018</span>
-                        </td>
-
-                        <td class="package-icon-cell" aria-hidden="true"></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
+
         @if (User.Identity.Name == Model.ApplicationUser.UserName)
         {
             <a href="~/Package/UploadNewVersion/@Model.Id">
                 Upload New Version of this Package
             </a>
-            @*using (Html.BeginForm("UploadNewVersion", "Package", new { id = Model.Id }, FormMethod.Get))
-            {
-                <button type="submit" class="btn btn-primary">
-                    Upload new version
-                </button>
-            }*@
-
-
-            @*@Html.ActionLink("Upload", "UploadNewVersion", "Package",new { @packageId = Model.Id})*@
-
-   
-                    <!--<div class="form-group row">
-                        <div class="col-md-8">
-                            <input type="submit" class="btn btn-primary" id="btn_submit" value="Upload" />
-                        </div>
-                    </div>
-                }
-            </div>-->
-
-
-
-
         }
+
     </article>
 
     <aside aria-label="Package details info" class="col-sm-3 package-details-info">
-        <h2>Info</h2>
-        <ul class="list-unstyled ms-Icon-ul">
-            <li>
-                <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
-                last updated <span data-datetime="2019-11-09T01:27:30.7230000" title="2019-11-09T01:27:30Z">11/9/2019</span>
-            </li>
-
-            <li>
-                <i class="ms-Icon ms-Icon--CloudDownload" aria-hidden="true"></i>
-                <a href="https://www.nuget.org/api/v2/package/Newtonsoft.Json/12.0.3" data-track="outbound-manual-download" title="Download the raw nupkg file." rel="nofollow">Download package</a>
-                &nbsp;(2.48 MB)
-            </li>
-
-
-
-
-        </ul>
-
-        <h2>Statistics</h2>
+        <h3>Statistics</h3>
         <ul class="list-unstyled ms-Icon-ul">
             <li>
                 <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
-                @Model.PackageDownloadCount downloads
-            </li>
-            <li>
-                <i class="ms-Icon ms-Icon--Giftbox" aria-hidden="true"></i>
-                73,994,180 downloads
-                of current version
+                @Model.PackageDownloadCount total downloads
             </li>
         </ul>
 
-        <h2>Owners</h2>
+        <h3>Owner</h3>
         <ul class="list-unstyled owner-list">
             <li>
                 <a href="mailto:" title="">
@@ -201,25 +122,34 @@
                 </a>
             </li>
         </ul>
-
     </aside>
 </div>
 
-
-<script>
-    $(function () {
-        $('download').click(function () {
-            $.ajax(
-                {
-                    url: '@Url.Action("Download","Package")',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    data: {
-                        id: 1
-                    },
-                    type: 'GET',
-                    success: alert('Success')
-                });
+@section scripts
+{
+    <script>
+        $(function () {
+            $(".download").click(function () {
+                //var pacakageId = window.location.pathname;
+                var id = $("#packageId").val();
+                //$.ajax(
+                //    {
+                //        type: "GET",
+                //        url: "/Package/Download/" + id,
+                //        contentType: "application/json; charset=utf-8",
+                //        dataType: 'json',
+                //        data: {
+                //            id: id
+                //        },
+                //        success: function (id) {
+                //            location.reload();
+                //            //alert("sucess");
+                //            //window.location = "/Package/Download/"+id;
+                //        }
+                //    });
+                location.reload();
+                ///window.location = ;
+            });
         });
-    });
-</script>
+    </script>
+}

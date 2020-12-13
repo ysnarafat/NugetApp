@@ -44,6 +44,7 @@ namespace NugetApp.Web.Models.PackageModels
             foreach(var item in packageDTO.PackageVersions)
             {
                 var packageVersion = new PackageVersionDetailsModel();
+                packageVersion.Id = item.Id;
                 packageVersion.CreatedAt = item.CreatedAt;
                 packageVersion.FilePath = item.FilePath;
                 packageVersion.VersionDownloadCount = item.VersionDownloadCount;
@@ -51,6 +52,7 @@ namespace NugetApp.Web.Models.PackageModels
                 PackageVersionDetails.Add(packageVersion);
             }
 
+            PackageVersionDetails = PackageVersionDetails.OrderByDescending(x => x.CreatedAt).ToList();
         }
     }
 }

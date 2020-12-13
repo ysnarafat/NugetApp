@@ -84,19 +84,16 @@ namespace NugetApp.Web.Models.PackageModels
 
             var filePath = StoreFile();
 
-            package.PackageVersions = new List<PackageVersion>
+            var packageVersion = new PackageVersion
             {
-                new PackageVersion
-                {
-                    VersionDownloadCount = 0,
-                    CreatedAt = DateTime.Now.Date,
-                    VersionNumber = Version,
-                    FilePath = filePath,
-                    Package = package
-                }
+                VersionDownloadCount = 0,
+                CreatedAt = DateTime.Now.Date,
+                VersionNumber = Version,
+                FilePath = filePath,
+                Package = package
             };
 
-            await _packageService.UploadNewVersion(package);
+            await _packageService.UploadNewVersion(package,packageVersion);
         }
 
         public async Task LoadPackageData(int  pacakgeId)

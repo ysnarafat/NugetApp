@@ -213,6 +213,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PackageModels\PackageDetailsModel.cs" />
+    <Compile Include="Models\PackageModels\PackageDownloadModel.cs" />
     <Compile Include="Models\PackageModels\PackageModel.cs" />
     <Compile Include="Models\PackageModels\PackageUploadModel.cs" />
     <Compile Include="Models\PackageModels\PackageVersionDetailsModel.cs" />

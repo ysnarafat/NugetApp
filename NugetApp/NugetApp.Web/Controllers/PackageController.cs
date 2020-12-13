@@ -1,6 +1,7 @@
 ﻿using NugetApp.Web.Models.PackageModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -27,6 +28,7 @@ namespace NugetApp.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Upload(PackageUploadModel model)
         {
@@ -43,7 +45,7 @@ namespace NugetApp.Web.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> UploadNewVersion(int id)
         {
@@ -53,6 +55,7 @@ namespace NugetApp.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> UploadNewVersion(PackageUploadModel model)
         {
@@ -69,12 +72,19 @@ namespace NugetApp.Web.Controllers
             return View(model);
         }
 
-        [Authorize]
         [HttpGet]
-        public void Delete()
+        public virtual async Task<ActionResult> Download(int id)
         {
-            var model = new PackageUploadModel();
-            
+            var model = new PackageDownloadModel();
+            try
+            {
+                await model.IncrementDownloadCount(id);
+                return File(model.FilePath, MimeMapping.GetMimeMapping(model.FileName), model.FileName);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [Authorize]
@@ -93,13 +103,6 @@ namespace NugetApp.Web.Controllers
 
             return View(model);
         }
-
-        //[HttpPost]
-        //public void Delete(int id)
-        //{
-        //    var model = new PackageUploadModel();
-        //    model.Delete(id);
-        //}
 
         [HttpGet]
         public async Task<ActionResult> Details(int id)
