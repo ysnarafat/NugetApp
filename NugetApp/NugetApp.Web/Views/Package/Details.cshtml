@@ -47,67 +47,72 @@
                     {
                         if (i == 0)
                         {
-                    <tr class="bg-info">
-                        <td>
-                            <a href="" title="">
-                                @Model.PackageVersionDetails[i].VersionNumber
-                            </a>
-                        </td>
-                        <td>
-                            @Model.PackageVersionDetails[i].VersionDownloadCount
-                        </td>
-                        <td>
-                            <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
-                        </td>
-                        <td>
-                            <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
-                            <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
-                        </td>
-                        <td class="package-icon-cell" aria-hidden="true"></td>
+                            <tr class="bg-info">
+                                <td>
+                                    <a href="" title="">
+                                        @Model.PackageVersionDetails[i].VersionNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model.PackageVersionDetails[i].VersionDownloadCount
+                                </td>
+                                <td>
+                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
+                                </td>
+                                <td>
+                                    <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
+                                    <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id" target="_blank">Download</a>
+                                </td>
+                                <td class="package-icon-cell" aria-hidden="true"></td>
 
-                    </tr>
+                            </tr>
                         }
                         else
                         {
-                <tr>
-                    <td>
-                        <a href="" title="">
-                            @Model.PackageVersionDetails[i].VersionNumber
-                        </a>
-                    </td>
-                    <td>
-                        @Model.PackageVersionDetails[i].VersionDownloadCount
-                    </td>
-                    <td>
-                        <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
-                    </td>
-                    <td>
-                        <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
-                        <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id" target="_blank">Download</a>
-                    </td>
-                    <td class="package-icon-cell" aria-hidden="true"></td>
-                </tr>
+                            <tr>
+                                <td>
+                                    <a href="" title="">
+                                        @Model.PackageVersionDetails[i].VersionNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model.PackageVersionDetails[i].VersionDownloadCount
+                                </td>
+                                <td>
+                                    <span data-datetime="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")" title="@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")">@Model.PackageVersionDetails[i].CreatedAt.Date.ToString("d")</span>
+                                </td>
+                                <td>
+                                    <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
+                                    <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id" target="_blank">Download</a>
+                                </td>
+                                <td class="package-icon-cell" aria-hidden="true"></td>
+                            </tr>
                         }
                     }
                 </tbody>
             </table>
         </div>
 
-        @if (User.Identity.Name == Model.ApplicationUser.UserName)
+        @if (Model.ApplicationUser != null)
         {
-            <a href="~/Package/UploadNewVersion/@Model.Id">
-                Upload New Version of this Package
-            </a>
+            if (User.Identity.Name == Model.ApplicationUser.UserName)
+            {
+                <a href="~/Package/UploadNewVersion/@Model.Id">
+                    Upload New Version of this Package
+                </a>
+            }
         }
 
     </article>
 
     <aside aria-label="Package details info" class="col-sm-3 package-details-info">
-        <h3>Statistics</h3>
+        <h3>Pacakge Info</h3>
         <ul class="list-unstyled ms-Icon-ul">
             <li>
-                <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
-                @Model.PackageDownloadCount total downloads
+                Total downloads: @Model.PackageDownloadCount
+            </li>
+            <li>
+                Last updated: @Model.LastUpdatedAt
             </li>
         </ul>
 
@@ -121,41 +126,3 @@
         </ul>
     </aside>
 </div>
-
-@section scripts
-{
-    <script>
-        $(function () {
-            $(".downloadPackage").click(function () {
-                //var pacakageId = window.location.pathname;
-               
-                @*$.ajax(
-                    {
-                        type: "GET",
-                        url: "@Url.Action("Download","Package")",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: 'json',
-                        data: {
-                            id: id
-                        },
-                        success: function (id) {
-                            //$(".table").after(html);
-                            //alert("sucess");
-                            //windows.location.reload(1);
-                            //window.location = "~/Package/Download" + id;
-                            location.reload();
-                        }
-                    });
-                return true;
-                //location.reload();
-                ///window.location = ;
-                });*@
-                alert("sucess");
-                location.reload();
-                //window.location.replace("~/Package/Index");
-                //setTimeout(function () {
-                //    window.location.reload(1);
-                //}, 5000);
-        });
-    </script>
-}

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace NugetApp.Web.Controllers
 {
@@ -30,6 +31,7 @@ namespace NugetApp.Web.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Upload(PackageUploadModel model)
         {
             try
@@ -63,12 +65,14 @@ namespace NugetApp.Web.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadNewVersion(PackageUploadModel model)
         {
             try
             {
                 await model.CreateNewVersion(User.Identity.Name);
                 TempData["SuccessNotify"] = "Successfully uploaded your package";
+                return RedirectToAction("Details", new RouteValueDictionary( new { id = model.Id }));
             }
             catch
             {

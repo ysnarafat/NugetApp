@@ -55,16 +55,6 @@
                         @Html.ValidationMessageFor(m => m.File, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                @*<div class="form-group row">
-                <div class="col-md-1">
-                    @Html.LabelFor(m => m.CategoryId)
-                </div>
-                <div class="col-md-5">
-                    @Html.DropDownListFor(m => m.CategoryId, new SelectList(categories, "Id", "Name"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
                 <div class="form-group row">
                     <div class="col-md-8">
                         <input type="submit" class="btn btn-primary" id="btn_submit" value="Upload" />

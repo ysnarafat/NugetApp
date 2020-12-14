@@ -29,8 +29,6 @@ namespace NugetApp.Web.Models.PackageModels
         public void GetAllPackages()
         {
             var packageList =  _packageService.GetAllPackages();
-
-            //Packages = packageList;
             foreach (var package in packageList)
             {
                 Packages.Add
@@ -56,7 +54,6 @@ namespace NugetApp.Web.Models.PackageModels
             if (user == null) throw new InvalidOperationException("User cannot be null.");
 
             var packageList = _packageService.GetPackagesOfUserId(user);
-            //Packages = packageList;
             foreach (var package in packageList)
             {
                 Packages.Add

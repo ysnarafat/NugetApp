@@ -20,6 +20,7 @@ namespace NugetApp.Web.Models.PackageModels
         public long PackageDownloadCount { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string LastPackageVersion { get; set; }
+        public string LastUpdatedAt { get; set; }
         public IList<PackageVersionDetailsModel> PackageVersionDetails { get; set; }
 
         public PackageDetailsModel()
@@ -43,6 +44,7 @@ namespace NugetApp.Web.Models.PackageModels
             PackageDownloadCount = packageDTO.PackageDownloadCount;
             ApplicationUser = packageDTO.ApplicationUser;
             LastPackageVersion = packageDTO.LastPackageVersion;
+            LastUpdatedAt = packageDTO.LastUpdatedAt.ToString("d");
             PackageVersionDetails = new List<PackageVersionDetailsModel>();
 
             foreach(var item in packageDTO.PackageVersions)

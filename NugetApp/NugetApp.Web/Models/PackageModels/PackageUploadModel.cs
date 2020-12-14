@@ -101,7 +101,7 @@ namespace NugetApp.Web.Models.PackageModels
         {
             var package = await _packageService.GetPackageById(pacakgeId);
 
-            if (package == null) throw new Exception("Erro occured in getting package");
+            if (package == null) throw new Exception("Error occured in getting package");
 
             Id = package.Id;
             Name = package.Name;
