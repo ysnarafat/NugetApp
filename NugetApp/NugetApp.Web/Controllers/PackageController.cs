@@ -50,9 +50,15 @@ namespace NugetApp.Web.Controllers
         public async Task<ActionResult> UploadNewVersion(int id)
         {
             var model = new PackageUploadModel();
-            await model.LoadPackageData(id);
-
-            return View(model);
+            try
+            {
+                await model.LoadPackageData(id);
+                return View(model);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [Authorize]
@@ -80,6 +86,7 @@ namespace NugetApp.Web.Controllers
             {
                 await model.IncrementDownloadCount(id);
                 return File(model.FilePath, MimeMapping.GetMimeMapping(model.FileName), model.FileName);
+                //return View();
             }
             catch
             {
@@ -108,9 +115,16 @@ namespace NugetApp.Web.Controllers
         public async Task<ActionResult> Details(int id)
         {
             var model = new PackageDetailsModel();
-            await model.GetPackageDetails(id);
+            try
+            {
+                await model.GetPackageDetails(id);
 
-            return View(model);
+                return View(model);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
     }
 }

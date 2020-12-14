@@ -19,6 +19,7 @@ namespace NugetApp.Web.Models.PackageModels
         public string Description { get; set; }
         public long PackageDownloadCount { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+        public string LastPackageVersion { get; set; }
         public IList<PackageVersionDetailsModel> PackageVersionDetails { get; set; }
 
         public PackageDetailsModel()
@@ -29,6 +30,8 @@ namespace NugetApp.Web.Models.PackageModels
         public async Task GetPackageDetails(int id)
         {
             var package = await _packageService.GetPackageDetails(id);
+            if (package == null) throw new Exception("Package not found");
+
             PopulatePackageDetails(package);
         }
 
@@ -39,6 +42,7 @@ namespace NugetApp.Web.Models.PackageModels
             Description = packageDTO.Description;
             PackageDownloadCount = packageDTO.PackageDownloadCount;
             ApplicationUser = packageDTO.ApplicationUser;
+            LastPackageVersion = packageDTO.LastPackageVersion;
             PackageVersionDetails = new List<PackageVersionDetailsModel>();
 
             foreach(var item in packageDTO.PackageVersions)

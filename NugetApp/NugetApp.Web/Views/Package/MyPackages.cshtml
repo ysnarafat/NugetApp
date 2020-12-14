@@ -4,7 +4,7 @@
     ViewBag.Title = "MyPackages";
 }
 
-<h2>Packages</h2>
+<h2>My packages</h2>
 
 <div class="container">
 
@@ -37,18 +37,18 @@
                                         @package.TotalDowloadCount total downloads
                                     </span>
                                 </li>
-                                @*<li>
+                                <li>
                                     <span class="icon-text">
                                         <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
-                                        last updated <span>@package.PackageVersions.</span>
+                                        last updated <span data-datetime="@package.LastUpdatedAt.ToString("d")" title="@package.LastUpdatedAt.ToString("d")">@package.LastUpdatedAt.ToString("d")</span>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="icon-text">
                                         <i class="ms-Icon ms-Icon--Flag" aria-hidden="true"></i>
-                                        Latest version: <span class="text-nowrap">12.0.3 </span>
+                                        Latest version: <span class="text-nowrap">@package.LastPackageVersion</span>
                                     </span>
-                                </li>*@
+                                </li>
                             </ul>
 
                             <div class="package-details">

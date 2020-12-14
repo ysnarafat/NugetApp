@@ -13,6 +13,8 @@ namespace NugetApp.Core.DTOs
         public string Name { get; set; }
         public string Description { get; set; }
         public long PackageDownloadCount { get; set; }
+        public string LastPackageVersion { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public IList<PackageVersionDTO> PackageVersions { get; set; }
     }

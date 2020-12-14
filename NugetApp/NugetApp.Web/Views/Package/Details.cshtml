@@ -16,7 +16,7 @@
         <div class="package-title">
             <h1>
                 @Model.Name
-                <small class="text-nowrap">12.0.3</small>
+                <small class="text-nowrap">@Model.LastPackageVersion</small>
 
                 <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-25x25.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
             </h1>
@@ -49,7 +49,7 @@
                         {
                     <tr class="bg-info">
                         <td>
-                            <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                            <a href="" title="">
                                 @Model.PackageVersionDetails[i].VersionNumber
                             </a>
                         </td>
@@ -61,8 +61,7 @@
                         </td>
                         <td>
                             <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
-                            @*<button id="download" class="btn btn-primary">download</button>*@
-                            <a class="download" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
+                            <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
                         </td>
                         <td class="package-icon-cell" aria-hidden="true"></td>
 
@@ -72,7 +71,7 @@
                         {
                 <tr>
                     <td>
-                        <a href="/packages/Newtonsoft.Json/12.0.2" title="12.0.2">
+                        <a href="" title="">
                             @Model.PackageVersionDetails[i].VersionNumber
                         </a>
                     </td>
@@ -84,11 +83,9 @@
                     </td>
                     <td>
                         <input id="packageId" type="hidden" class="package-title" value="@Model.PackageVersionDetails[i].Id" />
-                        @*<button id="download" class="btn btn-primary">download</button>*@
-                        <a class="download" href="~/Package/Download/@Model.PackageVersionDetails[i].Id">Download</a>
+                        <a class="downloadPackage" href="~/Package/Download/@Model.PackageVersionDetails[i].Id" target="_blank">Download</a>
                     </td>
                     <td class="package-icon-cell" aria-hidden="true"></td>
-
                 </tr>
                         }
                     }
@@ -129,27 +126,36 @@
 {
     <script>
         $(function () {
-            $(".download").click(function () {
+            $(".downloadPackage").click(function () {
                 //var pacakageId = window.location.pathname;
-                var id = $("#packageId").val();
-                //$.ajax(
-                //    {
-                //        type: "GET",
-                //        url: "/Package/Download/" + id,
-                //        contentType: "application/json; charset=utf-8",
-                //        dataType: 'json',
-                //        data: {
-                //            id: id
-                //        },
-                //        success: function (id) {
-                //            location.reload();
-                //            //alert("sucess");
-                //            //window.location = "/Package/Download/"+id;
-                //        }
-                //    });
-                location.reload();
+               
+                @*$.ajax(
+                    {
+                        type: "GET",
+                        url: "@Url.Action("Download","Package")",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        data: {
+                            id: id
+                        },
+                        success: function (id) {
+                            //$(".table").after(html);
+                            //alert("sucess");
+                            //windows.location.reload(1);
+                            //window.location = "~/Package/Download" + id;
+                            location.reload();
+                        }
+                    });
+                return true;
+                //location.reload();
                 ///window.location = ;
-            });
+                });*@
+                alert("sucess");
+                location.reload();
+                //window.location.replace("~/Package/Index");
+                //setTimeout(function () {
+                //    window.location.reload(1);
+                //}, 5000);
         });
     </script>
 }

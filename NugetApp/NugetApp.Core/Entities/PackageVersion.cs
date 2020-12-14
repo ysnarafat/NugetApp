@@ -9,7 +9,6 @@ namespace NugetApp.Core.Entities
     public class PackageVersion
     {
         public virtual int Id { get; set; }
-        //public virtual string Description { get; set; }
         public virtual string VersionNumber { get; set; }
         public virtual string FilePath { get; set; }
         public virtual long VersionDownloadCount { get; set; }

@@ -18,23 +18,46 @@ namespace NugetApp.Core.Services
             _packageUnitofWork = packageUnitofWork;
             _session = session;
         }
-        public async Task Upload(Package package)
+        public async Task Upload(Package package,PackageVersion packageVersion)
         {
             await _packageUnitofWork.PackageRepository.Create(package);
-
+            await _packageUnitofWork.PackageVersionRepository.Create(packageVersion);
         }
 
         public async Task Delete(int id)
         {
-            await _packageUnitofWork.PackageRepository.Delete(id);
+            _packageUnitofWork.BeginTransaction(_session);
+            try
+            {
+                await _packageUnitofWork.PackageRepository.Delete(id);
+                _packageUnitofWork.Commit();
+            }
+            catch
+            {
+                _packageUnitofWork.Rollback();
+            }
+
         }
 
-        public IList<Package> GetAllPackages()
+        public IList<PackageDTO> GetAllPackages()
         {
-            //_session.Clear();
-
             var list = _packageUnitofWork.PackageRepository.Get();
-            return list;
+            var packageList = new List<PackageDTO>();
+            foreach(var item in list)
+            {
+                packageList.Add(new PackageDTO
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    ApplicationUser = item.ApplicationUser,
+                    Description = item.Description,
+                    LastPackageVersion = item.LastPackageVersion,
+                    LastUpdatedAt = item.LastUpdatedAt,
+                    PackageDownloadCount = item.PackageDownloadCount
+                });
+            }
+
+            return packageList;
         }
 
         public IList<Package> GetPackagesOfUserId(ApplicationUser user)
@@ -61,7 +84,10 @@ namespace NugetApp.Core.Services
                 Id = package.Id,
                 ApplicationUser = package.ApplicationUser,
                 Name = package.Name,
+                Description = package.Description,
                 PackageDownloadCount = package.PackageDownloadCount,
+                LastPackageVersion = package.LastPackageVersion,
+                LastUpdatedAt = package.LastUpdatedAt,
                 PackageVersions = new List<PackageVersionDTO>()
             };
 
@@ -83,8 +109,17 @@ namespace NugetApp.Core.Services
 
         public async Task UploadNewVersion(Package package,PackageVersion packageVersion)
         {
-            await _packageUnitofWork.PackageRepository.Update(package);
-            await _packageUnitofWork.PackageVersionRepository.Create(packageVersion);
+            _packageUnitofWork.BeginTransaction(_session);
+            try
+            {
+                await _packageUnitofWork.PackageRepository.Update(package);
+                await _packageUnitofWork.PackageVersionRepository.Create(packageVersion);
+                _packageUnitofWork.Commit();
+            }
+            catch
+            {
+                _packageUnitofWork.Rollback();
+            }
         }
 
         public async Task<PackageVersion> GetPackageVersionById(int packageVersionId)
