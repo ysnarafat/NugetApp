@@ -3,7 +3,7 @@
 * [Technologies](#technologies)
 * [Run at your end](#run-at-you-end)
 
-# General Info
+## General Info
 This project is nuget like app where user can upload, download packages.
 
 ## Technologies
