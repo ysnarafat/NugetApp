@@ -14,11 +14,7 @@ namespace NugetApp.Web.Models.PackageModels
 {
     public class PackageUploadModel
     {
-        [Required]
-        //Microsoft.Web.Mvc.FileExtensions(Extensions = "csv",
-        //     ErrorMessage = "Specify a CSV file. (Comma-separated values)")]
-        //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.zip|.exe|.nupkg)$", ErrorMessage = "Only Zip files allowed.")]
-        public HttpPostedFileBase File { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -28,6 +24,12 @@ namespace NugetApp.Web.Models.PackageModels
 
         [Required]
         public string Version { get; set; }
+
+        [Required]
+        //Microsoft.Web.Mvc.FileExtensions(Extensions = "csv",
+        //     ErrorMessage = "Specify a CSV file. (Comma-separated values)")]
+        //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.zip|.exe|.nupkg)$", ErrorMessage = "Only Zip files allowed.")]
+        public HttpPostedFileBase File { get; set; }
 
         private readonly IPackageService _packageService;
 
@@ -50,50 +52,61 @@ namespace NugetApp.Web.Models.PackageModels
                 Name = Name,
                 PackageDownloadCount = 0,
                 ApplicationUser = user,
-                Description = Description
+                Description = Description,
+                LastPackageVersion = Version,
+                LastUpdatedAt = DateTime.Now
             };
 
             var filePath = StoreFile();
 
-            package.PackageVersions = new List<PackageVersion>
+            var packageVersion = new PackageVersion
             {
-                new PackageVersion
-                {
-                    VersionDownloadCount = 0,
-                    CreatedAt = DateTime.Now.Date,
-                    VersionNumber = Version,
-                    FilePath = filePath,
-                    Package = package
-                }
+                VersionDownloadCount = 0,
+                CreatedAt = DateTime.Now,
+                VersionNumber = Version,
+                FilePath = filePath,
+                Package = package
             };
 
-            await _packageService.Upload(package);
+            await _packageService.Upload(package,packageVersion);
         }
 
-        //public async Task Delete(int userName)
-        //{
-        //    //var user = await _applicationUserManager.FindByEmailAsync(userName);
+        public async Task CreateNewVersion(string userName)
+        {
+            var user = await _applicationUserManager.FindByEmailAsync(userName);
 
-        //    //var package = new Package
-        //    //{
-        //    //    Name = Name,
-        //    //    PackageDownloadCount = 0,
-        //    //    ApplicationUser = user,
-        //    //};
+            if (user == null) throw new InvalidOperationException("User cannot be null.");
 
-        //    //package.PackageVersions = new List<PackageVersion>
-        //    //{
-        //    //        new PackageVersion
-        //    //        {
-        //    //            Description = "Test",
-        //    //            VersionDownloadCount = 0,
-        //    //            CreatedAt = DateTime.Now,
-        //    //            Package = package
-        //    //        }
-        //    //};
+            var package = await _packageService.GetPackageById(Id);
+            package.ApplicationUser = user;
+            package.Description = Description;
+            package.LastPackageVersion = Version;
+            package.LastUpdatedAt = DateTime.Now;
 
-        //    _packageService.Delete(userName);
-        //}
+            var filePath = StoreFile();
+
+            var packageVersion = new PackageVersion
+            {
+                VersionDownloadCount = 0,
+                CreatedAt = DateTime.Now,
+                VersionNumber = Version,
+                FilePath = filePath,
+                Package = package
+            };
+
+            await _packageService.UploadNewVersion(package,packageVersion);
+        }
+
+        public async Task LoadPackageData(int  pacakgeId)
+        {
+            var package = await _packageService.GetPackageById(pacakgeId);
+
+            if (package == null) throw new Exception("Error occured in getting package");
+
+            Id = package.Id;
+            Name = package.Name;
+            Description = package.Description;
+        }
 
         private string StoreFile()
         {

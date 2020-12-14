@@ -10,10 +10,12 @@ namespace NugetApp.Core.UnitofWorks
     public class PackageUnitofWork : UnitofWork , IPackageUnitofWork
     {
         public IPackageRepository PackageRepository { get ; set ; }
-
-        public PackageUnitofWork(IPackageRepository packageRepository)
+        public IPackageVersionRepository PackageVersionRepository { get; set; }
+        public PackageUnitofWork(IPackageRepository packageRepository,
+        IPackageVersionRepository packageVersionRepository)
         {
             PackageRepository = packageRepository;
+            PackageVersionRepository = packageVersionRepository;
         }
     }
 }

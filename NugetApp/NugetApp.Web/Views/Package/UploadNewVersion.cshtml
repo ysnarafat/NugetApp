@@ -1,10 +1,10 @@
 ﻿@model NugetApp.Web.Models.PackageModels.PackageUploadModel
 
 @{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "Upload New Version";
 }
 
-<h3>Upload new package</h3>
+<h3>Upload new version of this package</h3>
 
 <div id="content">
     <div class="container-fluid" style="width:100%;">
@@ -14,7 +14,7 @@
             <hr />
         </div>
         <div class="mb-5">
-            @using (Html.BeginForm("Upload", "Package", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("UploadNewVersion", "Package", FormMethod.Post, new { enctype = "multipart/form-data"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
                         @Html.LabelFor(m => m.Name)
                     </div>
                     <div class="col-md-5">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" , @readonly = "readonly" })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -55,9 +55,10 @@
                         @Html.ValidationMessageFor(m => m.File, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <div class="col-md-8">
-                        <input type="submit" class="btn btn-primary" id="btn_submit" value="Upload" />
+                        <input type="submit" class="btn btn-primary" id="btn_submit" value="Upload new version" />
                     </div>
                 </div>
             }

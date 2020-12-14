@@ -8,9 +8,10 @@ namespace NugetApp.Core.DTOs
 {
     public class PackageVersionDTO
     {
-        public virtual string VersionNumber { get; set; }
-        public virtual string FilePath { get; set; }
-        public virtual long VersionDownloadCount { get; set; }
-        public virtual DateTime CreatedAt { get; set; }
+        public int Id { get; set; }
+        public string VersionNumber { get; set; }
+        public string FilePath { get; set; }
+        public long VersionDownloadCount { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

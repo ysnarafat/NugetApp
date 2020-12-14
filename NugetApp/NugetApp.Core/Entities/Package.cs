@@ -11,6 +11,8 @@ namespace NugetApp.Core.Entities
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
+        public virtual string LastPackageVersion { get; set; }
+        public virtual DateTime LastUpdatedAt { get; set; }
         public virtual long PackageDownloadCount { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<PackageVersion> PackageVersions { get; set; }

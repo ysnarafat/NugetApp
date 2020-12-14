@@ -10,10 +10,14 @@ namespace NugetApp.Core.Services
 {
     public interface IPackageService
     {
-        Task Upload(Package package);
+        Task Upload(Package package, PackageVersion packageVersion);
         Task Delete(int id);
-        IList<Package> GetAllPackages();
+        Task UpdateDownloadCount(Package package, PackageVersion packageVersion);
+        IList<PackageDTO> GetAllPackages();
         Task<PackageDTO> GetPackageDetails(int id);
+        Task<Package> GetPackageById(int packageId);
+        Task<PackageVersion> GetPackageVersionById(int packageVersionId);
         IList<Package> GetPackagesOfUserId(ApplicationUser user);
+        Task UploadNewVersion(Package package, PackageVersion packageVersion);
     } 
 }

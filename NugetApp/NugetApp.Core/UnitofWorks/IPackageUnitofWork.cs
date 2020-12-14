@@ -11,5 +11,7 @@ namespace NugetApp.Core.UnitofWorks
     {
         IPackageRepository PackageRepository { get; set; }
 
+        IPackageVersionRepository PackageVersionRepository { get; set; }
+
     }
 }

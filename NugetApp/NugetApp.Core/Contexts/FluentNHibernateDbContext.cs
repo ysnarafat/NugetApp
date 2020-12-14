@@ -25,7 +25,6 @@ namespace NugetApp.Core.Contexts
                 return _session;
             }
 
-            // this assumes you are using the default Identity model of "ApplicationUser"
             var myEntities = new[] {
                 typeof(ApplicationUser)
             };
@@ -51,6 +50,5 @@ namespace NugetApp.Core.Contexts
         {
             return CreateSession().OpenSession();
         }
-
     }
 }

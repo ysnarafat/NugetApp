@@ -7,61 +7,58 @@
 <h2>Packages</h2>
 
 <div class="container">
-
     <ul class="list-group list-group-flush">
         @for (int i = 0; i < Model.Packages.Count; i++)
         {
             <li class="list-group-item">
-            <article class="package" role="listitem">
+                <article class="package" role="listitem">
 
-                <div class="row">
-                    <div class="col-sm-1 hidden-xs hidden-sm col-package-icon">
-                        <img class="package-icon img-responsive" aria-hidden="true" alt="" src="https://api.nuget.org/v3-flatcontainer/newtonsoft.json/12.0.3/icon" onerror="this.src='https://www.nuget.org/Content/gallery/img/default-package-icon-256x256.png'; this.onerror = null;">
-                    </div>
-                    <div class="col-sm-11">
-                        <div class="package-header">
-                            <h3>
-                                <a href="~/Package/Details/@Model.Packages[i].Id">@Model.Packages[i].PackageName</a>
-                                <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-20x20.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
-                            </h3>
-                            
-                           
-
-                            <span class="package-by">
-                                Uploaded By: @Model.Packages[i].ApplicationUser.Email
-                            </span>
+                    <div class="row">
+                        <div class="col-sm-1 hidden-xs hidden-sm col-package-icon">
+                            <img class="package-icon img-responsive" aria-hidden="true" alt="" src="https://api.nuget.org/v3-flatcontainer/newtonsoft.json/12.0.3/icon" onerror="this.src='https://www.nuget.org/Content/gallery/img/default-package-icon-256x256.png'; this.onerror = null;">
                         </div>
-                        @*Newtonsoft.<wbr>Json*@
-                        <ul class="package-list">
-                            <li>
-                                <span class="icon-text">
-                                    <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
-                                    @Model.Packages[i].TotalDowloadCount total downloads
-                                </span>
-                            </li>
-                            @*<li>
-                                <span class="icon-text">
-                                    <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
-                                    last updated <span data-datetime="2019-11-09T01:27:30.7230000+00:00" title="2019-11-09T01:27:30Z">@Model.PackageDetails[i].</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="icon-text">
-                                    <i class="ms-Icon ms-Icon--Flag" aria-hidden="true"></i>
-                                    Latest version: <span class="text-nowrap">12.0.3 </span>
-                                </span>
-                            </li>*@
-                        </ul>
+                        <div class="col-sm-11">
+                            <div class="package-header">
+                                <h3>
+                                    <a href="~/Package/Details/@Model.Packages[i].Id">@Model.Packages[i].PackageName</a>
+                                    <img class="reserved-indicator" src="/Content/gallery/img/reserved-indicator.svg" onerror="this.src='https://www.nuget.org/Content/gallery/img/reserved-indicator-20x20.png'; this.onerror = null;" title="The ID prefix of this package has been reserved for one of the owners of this package by NuGet.org.">
+                                </h3>
 
-                        <div class="package-details">
-                            @Model.Packages[i].Description
+
+
+                                <span class="package-by">
+                                    Uploaded By: @Model.Packages[i].ApplicationUser.Email
+                                </span>
+                            </div>
+                            <ul class="package-list">
+                                <li>
+                                    <span class="icon-text">
+                                        <i class="ms-Icon ms-Icon--Download" aria-hidden="true"></i>
+                                        @Model.Packages[i].TotalDowloadCount total downloads
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="icon-text">
+                                        <i class="ms-Icon ms-Icon--History" aria-hidden="true"></i>
+                                        last updated <span data-datetime="@Model.Packages[i].LastUpdatedAt.ToString("d")" title="@Model.Packages[i].LastUpdatedAt.ToString("d")">@Model.Packages[i].LastUpdatedAt.ToString("d")</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="icon-text">
+                                        <i class="ms-Icon ms-Icon--Flag" aria-hidden="true"></i>
+                                        Latest version: <span class="text-nowrap">@Model.Packages[i].LastPackageVersion</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="package-details">
+                                @Model.Packages[i].Description
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-        </li>
+            </li>
         }
     </ul>
-
 </div>

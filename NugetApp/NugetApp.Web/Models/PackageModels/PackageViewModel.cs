@@ -13,7 +13,7 @@ namespace NugetApp.Web.Models.PackageModels
     public class PackageViewModel
     {
         public IList<PackageModel> Packages { get; set; }
-        ///public IList<Package> Packages { get; set; }
+        public string SearchText { get; set; }
 
         private readonly IPackageService _packageService;
 
@@ -28,10 +28,7 @@ namespace NugetApp.Web.Models.PackageModels
 
         public void GetAllPackages()
         {
-           var packageList =  _packageService.GetAllPackages();
-
-
-            //Packages = packageList;
+            var packageList =  _packageService.GetAllPackages();
             foreach (var package in packageList)
             {
                 Packages.Add
@@ -42,7 +39,9 @@ namespace NugetApp.Web.Models.PackageModels
                         Id = package.Id,
                         PackageName = package.Name,
                         TotalDowloadCount = package.PackageDownloadCount,
-                        ApplicationUser = package.ApplicationUser
+                        ApplicationUser = package.ApplicationUser,
+                        LastPackageVersion = package.LastPackageVersion,
+                        LastUpdatedAt = package.LastUpdatedAt
                     }
                 );
             }
@@ -55,7 +54,6 @@ namespace NugetApp.Web.Models.PackageModels
             if (user == null) throw new InvalidOperationException("User cannot be null.");
 
             var packageList = _packageService.GetPackagesOfUserId(user);
-            //Packages = packageList;
             foreach (var package in packageList)
             {
                 Packages.Add
@@ -66,7 +64,9 @@ namespace NugetApp.Web.Models.PackageModels
                         Id = package.Id,
                         PackageName = package.Name,
                         TotalDowloadCount = package.PackageDownloadCount,
-                        ApplicationUser = package.ApplicationUser
+                        ApplicationUser = package.ApplicationUser,
+                        LastPackageVersion = package.LastPackageVersion,
+                        LastUpdatedAt = package.LastUpdatedAt
                     }
                 );
             }

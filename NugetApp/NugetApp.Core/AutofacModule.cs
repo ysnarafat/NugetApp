@@ -18,6 +18,7 @@ namespace NugetApp.Core
         {
             builder.RegisterType<PackageRepository>().As<IPackageRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PackageUnitofWork>().As<IPackageUnitofWork>().InstancePerLifetimeScope();
+            builder.RegisterType<PackageVersionRepository>().As<IPackageVersionRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PackageService>().As<IPackageService>().InstancePerLifetimeScope();
             //builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
