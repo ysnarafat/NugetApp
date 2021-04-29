@@ -14,7 +14,7 @@ namespace NugetApp.Core.Mappings
         {
             Id(p => p.Id).GeneratedBy.Identity();
             Map(p => p.Name);
-            Map(p => p.Description);
+            Map(p => p.Description).Length(100000);
             Map(p => p.LastPackageVersion);
             Map(p => p.LastUpdatedAt);
             Map(p => p.PackageDownloadCount);
